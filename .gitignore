@@ -1,0 +1,27 @@
+# H2 Database files
+/data/
+*.mv.db
+*.trace.db
+
+# Maven
+/target/
+*.jar
+*.war
+*.jar.original
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Node (si se usa en frontend)
+node_modules/
+dist/
+build/

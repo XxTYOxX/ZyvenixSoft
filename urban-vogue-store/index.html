@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Urban Vogue Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="#inicio">URBAN VOGUE<span>STORE</span></a>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#tienda">Tienda</a>
+    <a href="#destacados">Destacados</a>
+    <a href="#colecciones">Publicaciones</a>
+    <a href="#nosotros">Nosotros</a>
+  </nav>
+  <div class="tools">
+    <button id="searchBtn" title="Buscar">⌕</button>
+    <button id="favBtn" title="Favoritos">♡</button>
+    <button id="cartBtn" title="Carrito" class="bag">▢<i id="cartBadge">0</i></button>
+    <button id="accountBtn" title="Cuenta">♙</button>
+  </div>
+</header>
+
+<main id="inicio" class="page-view">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-shade"></div>
+    <div class="hero-copy">
+      <div class="mini">NUEVA COLECCIÓN</div>
+      <h1>URBAN VOGUE</h1>
+      <p>Descubre nuestra colección de moda urbana, prendas esenciales y accesorios pensados para cada estilo.</p>
+      <div class="hero-actions">
+        <a class="white-btn" href="#tienda">Explorar Colección</a>
+        <a class="ghost-btn" href="#destacados">Ver destacados</a>
+      </div>
+      <div class="hero-quick">
+        <button class="cat-quick" data-filter="Hombres">Hombres</button>
+        <button class="cat-quick" data-filter="Mujeres">Mujeres</button>
+        <button class="cat-quick" data-filter="Accesorios">Accesorios</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories" id="colecciones">
+    <div class="mini dark">CATEGORÍAS</div>
+    <h2>Explora por categoría</h2>
+    <div class="category-row">
+      <button class="cat-card" data-filter="Hombres">
+        <img src="img/hero-hombres.jpg" alt="Hombres">
+        <span class="cat-dark"></span>
+        <strong>HOMBRES</strong>
+        <small>Moda masculina contemporánea</small>
+        <em class="cat-cta">Ver colección ›</em>
+      </button>
+      <button class="cat-card" data-filter="Mujeres">
+        <img src="img/hero-mujeres.jpg" alt="Mujeres">
+        <span class="cat-dark"></span>
+        <strong>MUJERES</strong>
+        <small>Elegancia y estilo para cada ocasión</small>
+        <em class="cat-cta">Ver colección ›</em>
+      </button>
+      <button class="cat-card" data-filter="Accesorios">
+        <img src="img/hero-accesorios.jpg" alt="Accesorios">
+        <span class="cat-dark"></span>
+        <strong>ACCESORIOS</strong>
+        <small>Completa tu look</small>
+        <em class="cat-cta">Ver colección ›</em>
+      </button>
+    </div>
+  </section>
+
+  <section class="collection" id="tienda">
+    <div class="mini dark">NUESTRA SELECCIÓN</div>
+    <h2 id="destacados">Descubre nuestra colección</h2>
+    <p class="sub">Descubre nuestra colección de productos</p>
+    <div class="products" id="products"></div>
+    <div class="pagination" id="tiendaPagination"></div>
+  </section>
+
+  <section class="promo">
+    <div>
+      <h2>¿Listo para renovar tu estilo?</h2>
+      <p>Descubre nuestras últimas tendencias y encuentra piezas que hablan de ti.</p>
+    </div>
+    <div class="promo-buttons">
+      <a href="#tienda" class="black-btn">Comprar ahora</a>
+      <a href="#nosotros" class="light-btn">Conocer nuestra historia</a>
+    </div>
+  </section>
+</main>
+
+<!-- PÁGINA: CHECKOUT -->
+<main id="page-checkout" class="page-view hidden">
+  <div class="checkout-page">
+    <div class="checkout-crumb">FINALIZAR COMPRA</div>
+    <h1 class="checkout-title">Checkout</h1>
+
+    <div class="checkout-grid">
+      <div>
+        <div class="checkout-box">
+          <h3>Dirección de envío</h3>
+          <form id="checkoutForm">
+            <div class="field-row">
+              <div class="field"><label>Nombre</label><input id="shipFirstName" required></div>
+              <div class="field"><label>Apellidos</label><input id="shipLastName" required></div>
+            </div>
+            <div class="field"><label>Dirección</label><input id="shipAddress" required></div>
+            <div class="field-row">
+              <div class="field"><label>Código postal</label><input id="shipZip" required></div>
+              <div class="field"><label>Ciudad</label><input id="shipCity" required></div>
+            </div>
+
+            <h3 class="pay-title">Método de pago</h3>
+            <label class="pay-option active" data-pay="card">
+              <input type="radio" name="payMethod" value="card" checked>
+              <div class="pay-info"><b>Tarjeta de crédito</b><small>Visa, Mastercard o American Express</small></div>
+              <span class="pay-icon">▭</span>
+            </label>
+            <label class="pay-option" data-pay="paypal">
+              <input type="radio" name="payMethod" value="paypal">
+              <div class="pay-info"><b>PayPal</b><small>Paga de forma segura con tu cuenta</small></div>
+              <span class="pay-icon">Ⓟ</span>
+            </label>
+
+            <div id="cardFields">
+              <div class="field"><label>Número de tarjeta</label><input id="cardNumber" placeholder="•••• •••• •••• ••••"></div>
+              <div class="field-row">
+                <div class="field"><label>Vencimiento</label><input id="cardExpiry" placeholder="MM / AA"></div>
+                <div class="field"><label>CVV</label><input id="cardCvv" placeholder="•••"></div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div>
+        <div class="checkout-box">
+          <h3>Resumen del pedido</h3>
+          <div id="checkoutSummary"></div>
+          <div class="summary-total-row"><span>Subtotal</span><b id="checkoutSubtotal">$0</b></div>
+          <div class="summary-total-row"><span>Envío</span><b>Gratis</b></div>
+          <div class="summary-total-row grand"><span>Total</span><b id="checkoutTotal">$0</b></div>
+          <button class="black-btn wide" type="submit" form="checkoutForm">Confirmar pago</button>
+          <p class="secure-note">Pago cifrado y protegido de forma segura</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- PÁGINA: PEDIDO CONFIRMADO -->
+<main id="page-pedido" class="page-view hidden">
+  <div class="confirm-page">
+    <div class="confirm-card">
+      <div class="confirm-icon">✓</div>
+      <div class="confirm-kicker">PAGO CONFIRMADO</div>
+      <h2>¡Gracias por tu compra!</h2>
+      <p>Tu pedido está confirmado. Te enviaremos un correo con todos los detalles y el seguimiento.</p>
+      <div class="confirm-box">
+        <div class="row"><span>Número de pedido</span><b id="orderNumber">—</b></div>
+        <div class="row"><span>Tiempo estimado de entrega</span><b>3-5 días laborables</b></div>
+      </div>
+      <button class="black-btn wide" id="backHomeBtn">Volver al inicio</button>
+    </div>
+  </div>
+</main>
+
+<!-- PÁGINA: PERFIL DE USUARIO -->
+<main id="page-perfil" class="page-view hidden">
+  <div class="profile-page">
+    <div class="profile-wrap">
+      <div class="mini dark">MI CUENTA</div>
+      <h1 class="checkout-title">Perfil de usuario</h1>
+      <div id="perfilContent"></div>
+    </div>
+  </div>
+</main>
+
+<!-- PÁGINA: CATEGORÍA (Hombres / Mujeres / Accesorios) -->
+<main id="page-categoria" class="page-view hidden">
+  <section class="hero cat-hero">
+    <div class="hero-bg" id="catHeroBg"></div>
+    <div class="hero-shade"></div>
+    <div class="hero-copy">
+      <h1 id="catTitle">HOMBRES</h1>
+      <p id="catText"></p>
+    </div>
+  </section>
+
+  <section class="collection cat-collection">
+    <div class="mini dark">NUEVOS LANZAMIENTOS</div>
+    <h2>Descubre nuestra nueva colección</h2>
+    <p class="sub">Descubre nuestra colección de prendas</p>
+    <div class="products" id="catProducts"></div>
+
+    <div class="cat-controls">
+      <button class="page-btn" id="catPrev" aria-label="Categoría anterior">‹</button>
+      <div class="pagination" id="catPagination"></div>
+      <button class="page-btn" id="catNext" aria-label="Categoría siguiente">›</button>
+    </div>
+    <button class="filter-btn" id="catFilterBtn">Filtrar</button>
+    <div class="filter-panel hidden" id="catFilterPanel"></div>
+  </section>
+
+  <section class="promo promo-slim">
+    <div class="promo-buttons">
+      <button class="black-btn" id="catBuyBtn">Comprar</button>
+      <button class="light-btn" id="catStoryBtn">Conocer nuestra historia</button>
+    </div>
+  </section>
+</main>
+
+<!-- PÁGINA: PANEL DE ADMINISTRADOR -->
+<main id="page-admin" class="page-view hidden">
+  <div class="admin-app" id="adminRoot"></div>
+</main>
+
+<footer id="nosotros">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <strong>URBAN VOGUE</strong>
+      <p>Moda contemporánea para todos los días.</p>
+    </div>
+    <div><h4>Productos</h4><a href="#tienda" class="footer-filter" data-filter="Hombres">Hombres</a><a href="#tienda" class="footer-filter" data-filter="Mujeres">Mujeres</a><a href="#tienda" class="footer-filter" data-filter="Accesorios">Accesorios</a></div>
+    <div><h4>Ayuda</h4><a href="#">Soporte</a><a href="#">Envíos</a><a href="#">Devoluciones</a></div>
+    <div><h4>Cuenta</h4><a href="#" id="loginFooter">Iniciar sesión</a><a href="#" id="registerFooter">Registrarme</a><a href="#" id="ordersFooter">Mis pedidos</a></div>
+  </div>
+  <div class="footer-line"></div>
+  <div class="copyright"><span>© 2026 Urban Vogue Store. Todos los derechos reservados.</span><span>Política de privacidad · Términos de servicio</span></div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="modal" id="searchModal">
+  <div class="modal-card">
+    <button class="x" data-close="searchModal">×</button>
+    <div class="mini dark">BUSCAR</div><h3>Encuentra tu estilo</h3>
+    <input id="searchInput" type="search" placeholder="Buscar camisa, jean, bolso...">
+    <div id="searchResults"></div>
+  </div>
+</div>
+
+<div class="modal" id="accountModal">
+  <div class="modal-card account-card">
+    <button class="x" data-close="accountModal">×</button>
+    <div id="accountContent"></div>
+  </div>
+</div>
+
+<aside class="cart-panel" id="cartPanel">
+  <div class="cart-head"><h3>Tu carrito</h3><button class="x" data-close="cartPanel">×</button></div>
+  <div id="cartContent"></div>
+  <div class="cart-bottom"><div><span>Total</span><b id="cartTotal">$0</b></div><button id="checkout" class="black-btn wide">Finalizar compra</button></div>
+</aside>
+
+
+<!-- MODO SIN CONEXIÓN: MINI JUEGO -->
+<div class="offline-game" id="offlineGame" aria-hidden="true">
+  <div class="offline-card">
+    <div class="offline-top">
+      <div>
+        <span class="offline-kicker">SIN CONEXIÓN</span>
+        <h2>La conexión se cayó</h2>
+        <p>Mientras vuelve Internet, juega una partida rápida.</p>
+      </div>
+      <button class="offline-close" id="closeOfflineGame" title="Cerrar">×</button>
+    </div>
+
+    <div class="game-hud">
+      <span>PUNTOS: <b id="gameScore">0</b></span>
+      <span>TIEMPO: <b id="gameTime">30</b>s</span>
+      <button id="restartGame">Reiniciar</button>
+    </div>
+
+    <canvas id="shootingGame" width="760" height="420"></canvas>
+
+    <div class="game-help">
+      <span>🖱️ Haz clic sobre los objetivos para disparar.</span>
+      <span>Sin sangre ni violencia gráfica.</span>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script type="module" src="js/main.js"></script>
+<script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});</script>
+</body>
+</html>
