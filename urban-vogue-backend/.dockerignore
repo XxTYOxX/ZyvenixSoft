@@ -1,0 +1,30 @@
+# Maven
+target/
+.mvn/
+mvnw
+mvnw.cmd
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Logs
+*.log
+
+# Local DB
+data/
+*.mv.db
+*.trace.db
+
+# Docker
+Dockerfile
+.dockerignore
