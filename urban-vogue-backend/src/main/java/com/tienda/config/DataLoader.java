@@ -2,6 +2,7 @@ package com.tienda.config;
 
 import com.tienda.model.Administrador;
 import com.tienda.model.Producto;
+import com.tienda.model.SuperAdministrador;
 import com.tienda.repository.ProductoRepository;
 import com.tienda.repository.UsuarioRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -11,7 +12,7 @@ import java.util.List;
 
 /**
  * Al arrancar el backend por primera vez (base de datos vacía), carga los
- * mismos 24 productos y la misma cuenta de administrador de demostración
+ * mismos 24 productos y las cuentas de administrador de demostración
  * que ya tenía la tienda, para que el frontend no pierda nada al conectarse.
  */
 @Component
@@ -30,10 +31,43 @@ public class DataLoader implements CommandLineRunner {
         if (productoRepository.count() == 0) {
             seedProductos();
         }
+        seedAdministradores();
+    }
+
+    private void seedAdministradores() {
+        // Admin principal (ya existía)
         if (usuarioRepository.findByEmail("alexander@urbanboguestore.com").isEmpty()) {
             Administrador admin = new Administrador(
                     "Alexander Jiménez", "alexander@urbanboguestore.com", "admin123", "EMP-000", 5);
             usuarioRepository.save(admin);
+        }
+
+        // SuperAdmin / Soporte técnico - CAMBIA ESTOS DATOS PARA PRODUCCIÓN
+        if (usuarioRepository.findByEmail("soporte@zyvenixsoft.com").isEmpty()) {
+            SuperAdministrador superAdmin = new SuperAdministrador(
+                    "Soporte ZyvenixSoft",
+                    "soporte@zyvenixsoft.com",
+                    "SuperAdmin2024!",  // CAMBIAR EN PRODUCCIÓN
+                    "SUP-001",
+                    10,  // nivel máximo
+                    true,  // esSuperUser
+                    "TOKEN-SEGURIDAD-" + System.currentTimeMillis()  // token único
+            );
+            usuarioRepository.save(superAdmin);
+        }
+
+        // Segundo superadmin opcional (ej. dueño)
+        if (usuarioRepository.findByEmail("owner@zyvenixsoft.com").isEmpty()) {
+            SuperAdministrador owner = new SuperAdministrador(
+                    "Owner ZyvenixSoft",
+                    "owner@zyvenixsoft.com",
+                    "OwnerPass2024!",  // CAMBIAR EN PRODUCCIÓN
+                    "SUP-000",
+                    10,
+                    true,
+                    "OWNER-TOKEN-" + System.currentTimeMillis()
+            );
+            usuarioRepository.save(owner);
         }
     }
 

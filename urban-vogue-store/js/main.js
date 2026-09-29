@@ -5,14 +5,30 @@ import { initSearch } from "./search.js";
 import { initOfflineGame } from "./offline-game.js";
 import { initCategory } from "./category.js";
 import { initCheckoutEvents } from "./checkout.js";
+import { state } from "./state.js";
+import { goToAdmin } from "./admin.js";
+import { showHome } from "./pages.js";
 
 function onCartChange() {
   renderCart();
 }
 
+// Restaurar sesión de administrador al recargar (Live Server hace reload completo)
+function restoreAdminSession() {
+  const user = state.getUser();
+  const hash = window.location.hash;
+  if (user && user.role === "admin" && hash === "#page-admin") {
+    goToAdmin();
+    return true;
+  }
+  return false;
+}
+
 // render inicial
-renderProducts();
-renderCart();
+if (!restoreAdminSession()) {
+  renderProducts();
+  renderCart();
+}
 
 // eventos
 initProductEvents(onCartChange);

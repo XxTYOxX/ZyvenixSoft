@@ -445,7 +445,7 @@ function onClick(e) {
   const d = el.dataset;
   switch (d.act) {
     case "nav": go(d.view); break;
-    case "logout": state.logout(); toast("Sesión cerrada"); showHome(); break;
+    case "logout": state.logout(); toast("Sesión cerrada"); showHome(); window.location.hash = "#inicio"; break;
     case "bell": ui.bell = !ui.bell; ui.menuFor = null; render(); break;
     case "note-go": go(d.view, d.q); break;
     case "search-go": go(d.view, d.q); break;
